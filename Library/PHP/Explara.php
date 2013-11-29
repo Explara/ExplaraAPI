@@ -39,8 +39,8 @@ class Explara {
 		$this->bookingKey				= explaraBookingKey;
 		$this->publisherKey				= explaraPublisherKey;
 		$this->privateKey				= explaraPrivateKey;
-		$this->apiUrl					= 'http://em.explaradev.com/api/event/';
-		$this->bookingUrl				= 'http://em.explaradev.com/booking';
+		$this->apiUrl					= 'http://em.explara.com/api/event/';
+		$this->bookingUrl				= 'http://em.explara.com/booking';
 	}
 	
 	public function createEvent($data){
