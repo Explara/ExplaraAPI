@@ -42,8 +42,8 @@ class Explara {
 		$this->accessToken				= accessToken;
 		$this->clientId					= clientId;
 		$this->clientSecret				= clientSecret;
-		$this->apiUrl					= 'http://em.explara.com/api/resource/';
-		$this->tokenUrl					= 'http://account.explara.com/account/oauth/';
+		$this->apiUrl					= 'http://em.explaradev.com/api/resource/';
+		$this->tokenUrl					= 'http://account.explaradev.com/account/oauth/';
 	}
 	
 	public function createEvent($data){
@@ -127,8 +127,7 @@ class Explara {
 		curl_setopt($ch, CURLOPT_TIMEOUT,30);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		$response 						= curl_exec($ch);
-		$response_data					= json_decode(urldecode($response),true);
-		return $response_data;
+		echo "<br><pre>"; print_r($response); die;
 	}
 	
 	private function initRequest($data,$requested_call){
@@ -138,9 +137,10 @@ class Explara {
 				$request_string .= '&'.$key.'='.$value; 
 			}
 		}
-		$url 							= $this->apiUrl.$requested_call.'?access_token='.$this->accessToken;
+		$url 							= $this->apiUrl.$requested_call;
 		$ch 							= curl_init($url) ;
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$request_string);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization : Bearer '.$this->accessToken));
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT,30);
