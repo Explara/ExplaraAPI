@@ -127,7 +127,8 @@ class Explara {
 		curl_setopt($ch, CURLOPT_TIMEOUT,30);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		$response 						= curl_exec($ch);
-		echo "<br><pre>"; print_r($response); die;
+		$response_data					= json_decode(urldecode($response),true);
+		return $response_data;
 	}
 	
 	private function initRequest($data,$requested_call){
@@ -145,7 +146,6 @@ class Explara {
 		curl_setopt($ch, CURLOPT_TIMEOUT,30);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		$response 						= curl_exec($ch);
-		echo "<br><pre>"; print_r($response); die;
 		$response 						= str_replace('(','',$response);
 		$response						= str_replace(')','',$response);
 		$response_data					= json_decode(urldecode($response),true);
