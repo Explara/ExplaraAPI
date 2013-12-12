@@ -44,9 +44,9 @@ class Explara {
 		$this->publisherKey				= explaraPublisherKey;
 		$this->bookingKey				= explaraBookingKey;
 		
-		$this->apiUrl					= 'http://em.explaradev.com/api/resource/';
-		$this->tokenUrl					= 'http://account.explaradev.com/account/oauth/';
-		$this->bookingUrl				= 'http://em.explaradev.com/booking';
+		$this->apiUrl					= 'http://em.explara.com/api/resource/';
+		$this->tokenUrl					= 'http://account.explara.com/account/oauth/';
+		$this->bookingUrl				= 'http://em.explara.com/booking';
 	}
 	
 	public function createEvent($data){
