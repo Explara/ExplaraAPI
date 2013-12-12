@@ -24,26 +24,29 @@ class Explara {
 	 */
 	const VERSION = '1.7';
 	
-	private $publisherKey;
 	private $accessToken;
 	private $clientId;
 	private $clientSecret;
 	private $apiUrl;
-	private $bookingUrl;
 	private $tokenUrl;
+	private $publisherKey;
+	private $bookingUrl;
+	private $privateKey;
 	
 	function __construct() {
 		$this->load_keys();
 	}
 	
 	private function load_keys(){	
-		$this->bookingKey				= explaraBookingKey;
-		$this->publisherKey				= explaraPublisherKey;
 		$this->accessToken				= accessToken;
 		$this->clientId					= clientId;
 		$this->clientSecret				= clientSecret;
+		$this->publisherKey				= explaraPublisherKey;
+		$this->bookingKey				= explaraBookingKey;
+		
 		$this->apiUrl					= 'http://em.explaradev.com/api/resource/';
 		$this->tokenUrl					= 'http://account.explaradev.com/account/oauth/';
+		$this->bookingUrl				= 'http://em.explaradev.com/booking';
 	}
 	
 	public function createEvent($data){
@@ -105,6 +108,43 @@ class Explara {
 		return $response;
 	}
 	
+	//For Booking
+	public function doBooking($data){
+	?>
+			<form name="formBooking" id="formBooking" style="display:none;" action="<?php echo $this->bookingUrl ?>" method="post">
+				<input type="text" name="bookingKey" value="<?php echo $this->bookingKey ?>" />
+				<?php foreach($data as $key=>$value) { ?>
+				<input type="text" name="<?php echo $key ?>" value="<?php echo $value ?>" />
+				<?php } ?>
+			</form>
+			<script type="text/javascript"> 
+				window.onload=function(){
+	            	document.getElementById("formBooking").submit();
+				}
+	       </script>
+	   <?php
+	}
+	//validate response
+	public function getResponse($response){
+		$decryptString			= base64_decode($response);
+		$param					= explode('|',$decryptString);
+		$orderNo				= $param[0];
+		$status					= $param[1];
+		$amount					= $param[2];
+		$secureCode				= $param[3];
+		if(md5($this->accessToken) != $secureCode){
+			return array("status"=>'error','message'=>'E022');
+		}else {
+			return array("status"=>'success','orderNo'=>$orderNo,'status'=>$status,'amount'=>$amount);
+		}
+	}
+	
+	public function getBookingList($fromDate,$toDate){
+		$data		= array('fromDate'=>$fromDate,'toDate'=>$toDate,'bookingKey'=>$this->bookingKey);
+		$response	= $this->initRequest($data,'get-booking-list');
+		return $response;
+	}
+		
 	//For Publisher
 	public function getEventListForPublisher($category){
 		$data		= array('publisherKey'=>$this->publisherKey,'category'=>$category);
@@ -112,14 +152,16 @@ class Explara {
 		return $response;
 	}
 	
+	//For Get Authorize code
 	public function getAuthorizeCode(){
 		$goToUrl	= $this->tokenUrl.'authorize?response_type=code&client_id='.$this->clientId.'&state=event';
 		header('Location: '.$goToUrl);
 	}
 	
+	//For get Token from Authorize code
 	public function getToken($code){
 		$request_string					= 'client_id='.$this->clientId.'&client_secret='.$this->clientSecret.'&grant_type=authorization_code&code='.$code;
-		$url 							= $this->tokenUrl.'token'	;
+		$url 							= 'https://account.userknows.com/account/oauth/token'	;
 		$ch 							= curl_init($url) ;
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$request_string);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -127,7 +169,6 @@ class Explara {
 		curl_setopt($ch, CURLOPT_TIMEOUT,30);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		$response 						= curl_exec($ch);
-		echo "<br><pre>"; print_r($response); die;
 	}
 	
 	private function initRequest($data,$requested_call){
@@ -146,6 +187,7 @@ class Explara {
 		curl_setopt($ch, CURLOPT_TIMEOUT,30);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		$response 						= curl_exec($ch);
+		echo "<br><pre>"; print_r($response); die;
 		$response 						= str_replace('(','',$response);
 		$response						= str_replace(')','',$response);
 		$response_data					= json_decode(urldecode($response),true);
@@ -302,7 +344,7 @@ final class Booking {
 		$this->city				= NULL;
 		$this->address  		= NULL;
 		$this->zipcode  		= NULL;
-		$this->returnUrl        = NULL;
+		$this->callbackUrl      = NULL;
 		$this->currency 		= 'INR';
 		$this->pg    			= 'pg2';
 	}
