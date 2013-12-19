@@ -19,7 +19,7 @@ function getTickets(){
 	echo "<br><pre>"; print_r($response); die;
 }
 
-function getReportAction(){
+function getReport(){
 	$explara					= new Explara();
 	$response					= $explara->getReport('EKCACB');
 	echo "<br><pre>"; print_r($response); die;
