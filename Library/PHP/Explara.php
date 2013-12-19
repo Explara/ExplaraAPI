@@ -7,7 +7,9 @@
  * 
  * NOTE : 
  * Only 10 create event requests are allowed in a day
+ * Only 50 update event requests are allowed in a day
  * Only 200 create ticket requests are allowed in a day
+ * Only 600 update ticket requests are allowed in a day
  * Only 2000 create discount requests are allowed in a day
  * 
  * Only 30 fetch details request are allowed in an hour (combination of get event, tickets, discounts, report & event list)
