@@ -1,7 +1,7 @@
 <?php
 require_once('../../Library/PHP/Explara.php');
 
-function bookingAction(){
+function booking(){
 	$explara					= new Explara();
 	$booking					= new Booking();
 	$booking->amount			= 200;
@@ -24,5 +24,12 @@ function bookingAction(){
 function bookingResponse(){
 	$explara					= new Explara();
 	$response					= $explara->getResponse($_POST['response']);				
+	echo "<br><pre>"; print_r($response); die;
+}
+
+function userList(){
+	$explara					= new Explara();
+	$response					= $explara->getBookingList(NULL,NULL);
+	//$response
 	echo "<br><pre>"; print_r($response); die;
 }
