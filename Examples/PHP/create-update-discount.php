@@ -1,7 +1,8 @@
 <?php
 
+require_once('../../Library/PHP/Explara.php');
+
 function createDiscount(){
-	require_once('../Explara.php');
 	$explara					= new Explara();
 	$event						= new Discount();
 	$event->eventId				= 'EKDJHH';
@@ -14,7 +15,6 @@ function createDiscount(){
 }
 
 function updateDiscount(){
-	require_once('../Explara.php');
 	$explara					= new Explara();
 	$event						= new Discount();
 	$event->eventId				= 'EKDJHH';

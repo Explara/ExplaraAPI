@@ -1,6 +1,7 @@
 <?php
+require_once('../../Library/PHP/Explara.php');
+
 function createTicket(){
-	require_once('../Explara.php');
 	$explara					= new Explara();
 	$event						= new Ticket();
 	$event->eventId				= 'EKDJHH';
@@ -19,7 +20,6 @@ function createTicket(){
 }
 
 function updateTicket(){
-	require_once('../Explara.php');
 	$explara					= new Explara();
 	$event						= new Ticket();
 	$event->eventId				= 'EKDJHH';
