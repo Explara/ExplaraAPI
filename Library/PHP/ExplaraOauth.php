@@ -45,10 +45,10 @@ class Explara {
 		$this->bookingKey				= explaraBookingKey;
 		$this->secretSoap				= secretSoap;
 		
-		$this->apiUrl					= 'http://em.explara.com/api/resource/';
-		$this->tokenUrl					= 'http://account.explara.com/account/oauth/';
-		$this->bookingUrl				= 'http://em.explara.com/booking';
-		$this->confirm					= 'http://em.explara.com/api/resource/pay';
+		$this->apiUrl					= 'https://www.explara.com/api/resource/';
+		$this->tokenUrl					= 'https://www.explara.com/a/account/oauth/';
+		$this->bookingUrl				= 'https://www.explara.com/booking';
+		$this->confirm					= 'https://www.explara.com/api/resource/pay';
 	}
 	
 	public function createEvent($data){
