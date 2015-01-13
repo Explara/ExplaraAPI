@@ -1,7 +1,7 @@
 <?php 
 
 /*
- *Explara API Library Version 1.7
+ *Explara API Library Version 2.3
  *Support Email : support@explara.com
  *Website URL   : http://developers.explara.com
  * 
