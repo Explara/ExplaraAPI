@@ -22,7 +22,7 @@ class Explara {
 	/**
 	 * Version.
 	 */
-	const VERSION = '1.7';
+	const VERSION = '2.3';
 	
 	private $accessToken;
 	private $clientId;
