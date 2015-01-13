@@ -45,10 +45,10 @@ class Explara {
 		$this->bookingKey				= explaraBookingKey;
 		$this->secretSoap				= secretSoap;
 		
-		$this->apiUrl					= 'https://em.explara.com/api/resource/';
-		$this->tokenUrl					= 'https://em.explara.com/a/account/oauth/';
-		$this->bookingUrl				= 'https://em.explara.com/booking';
-		$this->confirm					= 'https://em.explara.com/api/resource/pay';
+		$this->apiUrl					= 'https://www.explara.com/api/e/';
+		$this->tokenUrl					= 'https://www.explara.com/a/account/oauth/';
+		$this->bookingUrl				= 'https://www.explara.com/em/booking';
+		$this->confirm					= 'https://www.explara.com/api/resource/pay';
 	}
 	
 	public function createEvent($data){
@@ -252,7 +252,7 @@ class Explara {
 		$url 							= $this->apiUrl.$requested_call;
 		$ch 							= curl_init($url) ;
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$request_string);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization : Bearer '.$this->accessToken));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization:Bearer '.$this->accessToken));
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT,30);
@@ -278,7 +278,7 @@ class Explara {
 		$data2 							= http_build_query($data);
 		$ch 							= curl_init($url) ;
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$data2);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization : Bearer '.$this->accessToken));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization:Bearer '.$this->accessToken));
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT,30);
