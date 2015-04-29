@@ -489,7 +489,7 @@ final class Booking {
 //E004 : Start date should be greater than or equal to today's date
 //E005 : Subdomain already used by other user. Try other subdomain name
 //E006 : Url is already used in other event. Try other url
-//E007 : Invalid Event Id or Invalid API key for requested details (Use Admin account's access token to use this API)
+//E007 : Invalid Event Id or Invalid API key for requested API (Use Admin account's access token to use this API)
 //E008 : Invalid API Key for given Event Id
 //E009 : Url is already used by other event. Try other url
 //E010 : Invalid Location Id
